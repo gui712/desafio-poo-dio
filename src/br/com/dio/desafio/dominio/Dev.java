@@ -23,18 +23,19 @@ public class Dev {
     }
 
     public double calcularTotalXp() {
-        Iterator<Conteudo> iterator = this.conteudosConcluidos.iterator();
-        double soma = 0;
-        while(iterator.hasNext()){
-            double next = iterator.next().calcularXp();
-            soma += next;
-        }
-        return soma;
-
-        /*return this.conteudosConcluidos
-                .stream()
+        return this.conteudosConcluidos.stream()
                 .mapToDouble(Conteudo::calcularXp)
-                .sum();*/
+                .sum();
+    }
+
+    public double calcularProgresso() {
+        int totalConteudos = conteudosInscritos.size() + conteudosConcluidos.size();
+        if (totalConteudos == 0) {
+            return 0d;
+        }
+
+        double progresso = (double) conteudosConcluidos.size() / totalConteudos * 100;
+        return Math.round(progresso * 100d) / 100d;
     }
 
 
